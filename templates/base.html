@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}我的博客{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <svg style="display: none;">
         <symbol id="icon-home" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></symbol>
         <symbol id="icon-edit" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
@@ -73,28 +74,70 @@
             }
         }
     </script>
+    <script>
+     window.difyChatbotConfig = {
+      token: 'ZRbGiUtMToGqp2mc',
+      systemVariables: {
+        // user_id: 'YOU CAN DEFINE USER ID HERE',
+      },
+     }
+    </script>
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\begin{equation}', right: '\\end{equation}', display: true},
+                    {left: '\\begin{align}', right: '\\end{align}', display: true},
+                    {left: '\\begin{alignat}', right: '\\end{alignat}', display: true}
+                ],
+                throwOnError: false,
+                trust: (context) => ['\\htmlId', '\\href', '\\includegraphics'].includes(context.command),
+                strict: false,
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+                ignoredClasses: ["no-math"],
+                macros: {
+                    "\\RR": "\\mathbb{R}",
+                    "\\CC": "\\mathbb{C}",
+                    "\\ZZ": "\\mathbb{Z}",
+                    "\\NN": "\\mathbb{N}",
+                    "\\QQ": "\\mathbb{Q}",
+                    "\\E": "\\mathbb{E}",
+                    "\\D": "\\mathbb{D}",
+                    "\\J": "\\mathcal{J}",
+                    "\\clip": "\\text{clip}",
+                    "\\KL": "\\text{KL}"
+                },
+                fleqn: true,
+                output: 'html'
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="layout">
         <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
         <aside class="sidebar" id="sidebar">
-            <h1 class="logo">我的博客</h1>
             <nav class="nav">
-                <a href="{{ url_for('blog.index') }}" class="nav-link active">
-                    <svg class="icon"><use xlink:href="#icon-home"></use></svg>
-                    <span>首页</span>
+                <a href="{{ url_for('blog.index') }}" class="nav-link active" title="首页">
+                    <svg class="icon" width="24" height="24"><use xlink:href="#icon-home"></use></svg>
                 </a>
-                <a href="{{ url_for('blog.create') }}" class="nav-link">
-                    <svg class="icon"><use xlink:href="#icon-edit"></use></svg>
-                    <span>写文章</span>
+                <a href="{{ url_for('blog.create') }}" class="nav-link" title="写文章">
+                    <svg class="icon" width="24" height="24"><use xlink:href="#icon-edit"></use></svg>
                 </a>
-                <a href="{{ url_for('blog.about') }}" class="nav-link">
-                    <svg class="icon"><use xlink:href="#icon-info"></use></svg>
-                    <span>关于</span>
+                <a href="{{ url_for('blog.about') }}" class="nav-link" title="关于">
+                    <svg class="icon" width="24" height="24"><use xlink:href="#icon-info"></use></svg>
                 </a>
-                <a href="{{ url_for('blog.contact') }}" class="nav-link">
-                    <svg class="icon"><use xlink:href="#icon-mail"></use></svg>
-                    <span>联系</span>
+                <a href="{{ url_for('blog.contact') }}" class="nav-link" title="联系">
+                    <svg class="icon" width="24" height="24"><use xlink:href="#icon-mail"></use></svg>
                 </a>
             </nav>
             <div class="theme-colors">

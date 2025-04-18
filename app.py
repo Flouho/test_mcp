@@ -1,4 +1,10 @@
 from flask import Flask
+from flaskext.markdown import Markdown
+from flask_sqlalchemy import SQLAlchemy
+import markdown2
+from flask import Markup
+
+db = SQLAlchemy()
 from config import Config
 import markdown2
 from flask import Markup
@@ -9,13 +15,15 @@ def create_app():
     """应用工厂函数"""
     app = Flask(__name__, template_folder='templates')
     app.config.from_object(Config)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # 初始化数据库
     db.init_app(app)
     
     # 注册蓝图
     from blog import bp as blog_bp
-    app.register_blueprint(blog_bp, url_prefix='/')
+    app.register_blueprint(blog_bp)
     
     # 注册模板过滤器
     @app.template_filter('markdown')
