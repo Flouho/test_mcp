@@ -29,373 +29,56 @@ body {
 .layout {
     display: flex;
     min-height: 100vh;
-    flex-direction: column;
+    /* Default to row layout for desktop-first approach */
+    flex-direction: row;
 }
 
-@media (min-width: 768px) {
-    .layout {
-        flex-direction: row;
-    }
-    
-    .sidebar {
-        width: 250px;
-        position: sticky;
-        top: 0;
-        height: 100vh;
-    }
-}
-
-
-.logo {
-    margin: 0;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-}
-
-.nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.5rem;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-link:hover {
-    background-color: color-mix(in srgb, var(--primary-color) 10%, transparent);
-}
-
-.nav-link.active {
-    background-color: color-mix(in srgb, var(--primary-color) 15%, transparent);
-    font-weight: 500;
-}
-
-.nav-link.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background-color: var(--primary-color);
-    border-radius: 0 4px 4px 0;
-}
-
-.icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    fill: currentColor;
-}
-
-/* 移动端优化 */
-@media (max-width: 768px) {
-    .nav-link span {
-        display: none;
-    }
-    
-    .nav-link {
-        justify-content: center;
-        padding: 0.75rem;
-    }
-    
-    .nav-link.active::before {
-        width: 100%;
-        height: 2px;
-        top: auto;
-        bottom: 0;
-        border-radius: 2px;
-    }
-}
-
-.content {
-    flex: 1;
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-.content h1 {
-    font-size: 2.25rem;
-    margin: 2rem 0 1.5rem;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
-}
-
-.content h2 {
-    font-size: 1.875rem;
-    margin: 1.5rem 0 1rem;
-    color: color-mix(in srgb, var(--primary-color) 80%, var(--text-color));
-}
-
-.post-meta {
-    color: color-mix(in srgb, var(--text-color) 60%, transparent);
-    font-size: 0.875rem;
-    margin-bottom: 1.5rem;
-}
-
-.post-content {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-}
-
-.post-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.theme-switcher {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.theme-switcher button {
-    padding: 0.5rem;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-}
-
-/* Existing markdown styles */
-.content h1, .content h2, .content h3 {
-    color: var(--primary-color);
-    margin-top: 1.5em;
-}
-
-.post-content {
-    font-size: 1.125rem;
-    line-height: 1.8;
-}
-
-.post-content h2 {
-    font-size: 1.5rem;
-    margin: 2rem 0 1rem;
-    color: var(--primary-color);
-}
-
-.post-content pre {
-    background: color-mix(in srgb, var(--primary-color) 10%, var(--bg-color));
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    overflow-x: auto;
-    border-left: 4px solid var(--primary-color);
-    margin: 1.5rem 0;
-}
-
-.post-content code {
-    font-family: 'JetBrains Mono', monospace;
-    padding: 0.2em 0.4em;
-    background-color: color-mix(in srgb, var(--primary-color) 15%, transparent);
-    border-radius: 0.3em;
-}
-
-.post-content blockquote {
-    border-left: 4px solid color-mix(in srgb, var(--primary-color) 50%, transparent);
-    margin: 1.5rem 0;
-    padding: 0.5rem 1rem;
-    color: color-mix(in srgb, var(--text-color) 80%, transparent);
-}
-
-.content code {
-    font-family: 'Courier New', monospace;
-    background: rgba(0, 0, 0, 0.05);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.2rem;
-}
-
-/* 表单样式 */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-.form-group textarea {
-    min-height: 200px;
-    resize: vertical;
-}
-
-button[type="submit"] {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-}
-
-button[type="submit"]:hover {
-    background-color: color-mix(in srgb, var(--primary-color), black 15%);
-}
-
-.edit-btn {
-    display: inline-block;
-    margin-left: 1rem;
-    padding: 0.25rem 0.5rem;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    font-size: 0.875rem;
-}
-
-.edit-btn:hover {
-    background-color: color-mix(in srgb, var(--primary-color), black 15%);
-}
-
-.cancel-btn {
-    display: inline-block;
-    margin-left: 1rem;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--border-color);
-    color: var(--text-color);
-    border-radius: 0.375rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s;
-}
-
-.cancel-btn:hover {
-    background-color: color-mix(in srgb, var(--border-color), black 15%);
-}
-
-/* 菜单按钮 */
-.menu-toggle {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 100;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: block; /* 始终显示菜单按钮 */
-}
-
+/* Base Sidebar Styles (Desktop & Mobile) */
 .sidebar {
     width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    transition: transform 0.3s ease;
-    z-index: 90;
-    transform: translateX(-100%);
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
     background-color: var(--sidebar-bg);
     padding: 2rem;
+    height: 100vh; /* Full height */
+    position: sticky; /* Sticky on desktop */
+    top: 0;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem; /* Adjusted gap */
     border-right: 1px solid var(--border-color);
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transition: width 0.3s ease, padding 0.3s ease, transform 0.3s ease; /* Add transform transition */
+    z-index: 90; /* Ensure it's above content but below menu toggle */
 }
 
-.sidebar.collapsed {
-    transform: translateX(-100%);
-}
-
-.sidebar:not(.collapsed) {
-    transform: translateX(0);
-}
-
+/* Base Content Styles */
 .content {
-    transition: margin-left 0.3s ease;
-    margin-left: 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    flex-grow: 1; /* Allow content to grow */
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto; /* Center content horizontally */
+    line-height: 1.6;
+    transition: margin-left 0.3s ease, filter 0.3s ease; /* Add filter transition */
 }
 
-.sidebar:not(.collapsed) + .content {
-    margin-left: 270px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.close-sidebar {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    background: transparent;
-    border: none;
-    color: var(--text-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color 0.2s;
-    opacity: 0.8;
-}
-
-.close-sidebar:hover {
-    background-color: rgba(0,0,0,0.1);
-    opacity: 1;
-}
-
-/* 确保侧边栏内容可见 */
-.sidebar-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-.nav {
-    flex: 1;
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
+/* Desktop Specific Styles (Sidebar pushes content) */
+@media (min-width: 768px) {
+    .sidebar {
+        position: sticky; /* Override fixed if set for mobile */
+        transform: none !important; /* Ensure no transform on desktop */
     }
-}
-
-/* 主题颜色选择器 */
-.theme-color {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 2px solid var(--border-color);
-    cursor: pointer;
-    margin: 0 4px;
-}
-
-.theme-colors {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
+    .sidebar.collapsed {
+        width: 0;
+        padding-left: 0;
+        padding-right: 0;
+        overflow: hidden;
+        border-right: none; /* Hide border when collapsed */
+    }
+    .content {
+        margin-left: 0; /* Content margin adjusts based on sibling */
+    }
+     /* Hide mobile toggles */
+    .menu-toggle, .close-sidebar {
+        display: none;
+    }
 }

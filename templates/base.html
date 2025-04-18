@@ -17,7 +17,7 @@
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
         }
-        
+
         // Initialize theme
         const savedTheme = localStorage.getItem('theme') || 'system';
         setTheme(savedTheme);
@@ -25,9 +25,52 @@
         // Sidebar toggle function
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            const content = document.querySelector('.content');
-            sidebar.classList.toggle('collapsed');
-            content.classList.toggle('expanded');
+            const isCollapsed = sidebar.classList.toggle('collapsed');
+            // Add/remove body class for mobile overlay effect only on mobile
+            if (window.innerWidth < 768) {
+                document.body.classList.toggle('sidebar-open', !isCollapsed);
+            }
+        }
+
+        // Close sidebar function
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.add('collapsed');
+            // Remove body class for mobile overlay effect only on mobile
+            if (window.innerWidth < 768) {
+                document.body.classList.remove('sidebar-open');
+            }
+        }
+
+        // Optional: Close sidebar if clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            // Check if click is outside sidebar and toggle button, and if sidebar is open on mobile
+            if (window.innerWidth < 768 && !sidebar.contains(event.target) && !menuToggle.contains(event.target) && !sidebar.classList.contains('collapsed')) {
+                closeSidebar();
+            }
+        });
+
+        // Ensure body class is removed if window resizes from mobile to desktop with sidebar open
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                document.body.classList.remove('sidebar-open');
+                // Optional: decide if sidebar should be open or closed by default on desktop resize
+                // document.getElementById('sidebar').classList.remove('collapsed'); // Example: always open on resize to desktop
+            } else {
+                // Ensure body class is correct on resize to mobile
+                const sidebar = document.getElementById('sidebar');
+                document.body.classList.toggle('sidebar-open', !sidebar.classList.contains('collapsed'));
+            }
+        });
+
+        // Initial check on load for mobile
+        if (window.innerWidth < 768) {
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar.classList.contains('collapsed')) {
+                document.body.classList.add('sidebar-open');
+            }
         }
     </script>
 </head>
