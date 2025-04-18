@@ -1,41 +1,49 @@
-# Flask Blog Project
+# Flask Blog Project (Enhanced)
 
-A simple blog application built with Python Flask framework.
+A modern blog application built with Python Flask framework featuring:
 
-## Features
-- User authentication (login/register)
-- Create, edit and delete blog posts
-- Responsive design with Bootstrap
-- SQLite database
+## ✨ Key Features
+- **User Authentication**: Secure login/register system
+- **Post Management**: Create, edit and delete blog posts
+- **Responsive Design**: Mobile-friendly interface with custom CSS
+- **Database**: SQLite with SQLAlchemy ORM
+- **Math Support**: KaTeX integration for mathematical expressions
+- **Theme Switching**: Light/Dark/System theme options
 
-## Installation
-1. Clone the repository:
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.8+
+- pip
+
+### Installation
 ```bash
 git clone https://github.com/Flouho/test_mcp.git
 cd test_mcp
-```
-
-2. Create virtual environment and install dependencies:
-```bash
 python -m venv venv
 source venv/bin/activate  # Linux/MacOS
 venv\Scripts\activate     # Windows
 pip install -r requirements.txt
-```
-
-3. Initialize database:
-```bash
 python init_db.py
-```
-
-4. Run the application:
-```bash
 flask run --port 5001
 ```
 
-## Configuration
-- Edit `app.py` to change application settings
-- Modify `static/style.css` for custom styling
+## ⚙️ Configuration
 
-## License
-MIT
+| File | Purpose |
+|------|---------|
+| `app.py` | Main application configuration |
+| `config.py` | Environment variables |
+| `static/style.css` | Custom styling |
+| `models.py` | Database models |
+
+## 📝 Writing Math Content
+Use LaTeX syntax with `$...$` for inline math and `$$...$$` for display math.
+
+## 🌟 Recent Updates
+- Added KaTeX math rendering support
+- Improved mobile navigation
+- Enhanced theme switching system
+
+## 📜 License
+MIT License
