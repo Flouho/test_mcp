@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime
-from ..models import Post
-from .. import db
+from blog.models import Post
+from extensions import db
 
 bp = Blueprint('blog', __name__)
 
@@ -9,13 +9,13 @@ bp = Blueprint('blog', __name__)
 def index():
     """显示所有博客文章"""
     posts = Post.query.order_by(Post.created_at.desc()).all()
-    return render_template('blog/index.html', posts=posts)
+    return render_template('index.html', posts=posts)
 
 @bp.route('/post/<int:post_id>')
 def post(post_id):
     """显示单篇博客文章"""
     post = Post.query.get_or_404(post_id)
-    return render_template('blog/post.html', post=post)
+    return render_template('post.html', post=post)
 
 @bp.route('/create', methods=['GET', 'POST'])
 def create():
@@ -34,7 +34,7 @@ def create():
         flash('文章创建成功', 'success')
         return redirect(url_for('blog.index'))
         
-    return render_template('blog/create.html')
+    return render_template('create.html')
 
 @bp.route('/edit/<int:post_id>', methods=['GET', 'POST'])
 def edit(post_id):
@@ -49,14 +49,14 @@ def edit(post_id):
         flash('文章更新成功', 'success')
         return redirect(url_for('blog.post', post_id=post.id))
         
-    return render_template('blog/edit.html', post=post)
+    return render_template('edit.html', post=post)
 
 @bp.route('/about')
 def about():
     """关于页面"""
-    return render_template('blog/about.html')
+    return render_template('about.html')
 
 @bp.route('/contact')
 def contact():
     """联系页面"""
-    return render_template('blog/contact.html')
+    return render_template('contact.html')
