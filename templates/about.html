@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>About Us</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>About Our Website</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h2>Our Story</h2>
-        <p>This website was built with Flask to demonstrate web development skills.</p>
-        <p>It features responsive design and clean architecture.</p>
-    </div>
-    <footer>
-        <p>Flask Website &copy; 2025</p>
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}关于 - 我的博客{% endblock %}
+
+{% block content %}
+    <h2>关于我们</h2>
+    <p>这是一个使用Flask搭建的个人博客系统。</p>
+    <p>我们致力于提供简洁优雅的博客体验。</p>
+{% endblock %}

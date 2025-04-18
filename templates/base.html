@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}我的博客{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // Theme switching logic
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        setTheme(savedTheme);
+
+        // Sidebar toggle function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.querySelector('.content');
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('expanded');
+        }
+    </script>
+</head>
+<body>
+    <div class="layout">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <aside class="sidebar" id="sidebar">
+            <h1 class="logo">我的博客</h1>
+            <nav class="nav">
+                <a href="{{ url_for('index') }}" class="nav-link">首页</a>
+                <a href="{{ url_for('create') }}" class="nav-link">写文章</a>
+                <a href="/about" class="nav-link">关于</a>
+                <a href="/contact" class="nav-link">联系</a>
+            </nav>
+            <div class="theme-colors">
+                <div class="theme-color" style="background: #2563eb;" onclick="setTheme('light')" title="浅色主题"></div>
+                <div class="theme-color" style="background: #60a5fa;" onclick="setTheme('dark')" title="深色主题"></div>
+                <div class="theme-color" style="background: linear-gradient(135deg, #2563eb 50%, #1e293b 50%);" onclick="setTheme('system')" title="系统主题"></div>
+            </div>
+            <button class="close-sidebar" onclick="toggleSidebar()">«</button>
+        </aside>
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,33 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Flask Website</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Flask Website</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h2>About This Site</h2>
-        <p>This is an enhanced Flask website with improved styling and structure.</p>
-        
-        <h3>Features</h3>
-        <ul>
-            <li>Responsive design</li>
-            <li>Clean navigation</li>
-            <li>Modern styling</li>
-        </ul>
-    </div>
-    <footer>
-        <p>Flask Website &copy; 2025</p>
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    {% for post in posts %}
+    <article class="post">
+        <h2><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <p class="meta">发布于 {{ post.created_at.strftime('%Y-%m-%d') }}</p>
+        <div class="excerpt">{{ post.content[:200] }}...</div>
+        <a href="{{ url_for('post', post_id=post.id) }}">阅读更多</a>
+        <a href="{{ url_for('edit_post', post_id=post.id) }}" class="edit-btn">编辑</a>
+    </article>
+    {% endfor %}
+{% endblock %}
