@@ -2,10 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, Markup
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import markdown2
+from config import Config
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(Config)
 db = SQLAlchemy(app)
 
 @app.template_filter('markdown')
