@@ -3,7 +3,7 @@
 A modern blog application built with Python Flask framework featuring:
 
 ## ✨ Key Features
-- **User Authentication**: Secure login/register system
+- **User Authentication**: Basic login/register functionality
 - **Post Management**: Create, edit and delete blog posts
 - **Responsive Design**: Mobile-friendly interface with custom CSS
 - **Database**: SQLite with SQLAlchemy ORM
